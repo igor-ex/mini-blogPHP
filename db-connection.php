@@ -15,7 +15,7 @@ class db{
 		return self::$con;
 	}
 	static private function connect(){
-		self::$con = new PDO('mysql:host=localhost;dbname=test_blog','iii','iii',self::$options);
+		self::$con = new PDO('mysql:host=localhost;dbname=ff','iii','iii',self::$options);
 	}
 	static function connected(){
 		if(self::$con)

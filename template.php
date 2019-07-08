@@ -8,12 +8,21 @@
 <header class="blog-header">
 	<h1 class="blog-header__title"><a href="<?=BASE?>" class="blog-header__title-link">Мой блог</a></h1>
 </header>
-<main>
-<?php
-Doc::print_messages();
-echo $content;
-?>
-</main>
+<div class="wrapper">
+	<main class="main">
+	<?php
+	Doc::print_messages();
+	echo $content;
+	?>
+	</main>
+	<aside class="sidebar">
+	<?php
+	if(PAGE==='LIST'){
+		require_once 'slider.php';
+	}
+	?>
+	</aside>
+</div>
 <footer class="footer"></footer>
 </body>
 </html>

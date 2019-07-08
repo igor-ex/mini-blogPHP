@@ -1,4 +1,3 @@
-# mini-blogPHP
 
 Использовались MySQL и php 5.4.31
 Импортировать базу данных из файла test_blog.sql

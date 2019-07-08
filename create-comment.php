@@ -8,8 +8,8 @@ if($_SERVER['REQUEST_METHOD']==='GET'){
 }
 elseif($_SERVER['REQUEST_METHOD']==='POST'){
 	$blog_entry_id = $_GET['id'];
-	$text = prep($_POST['text']);
-	$name = prep($_POST['name']);
+	$text = isset($_POST['text']) ? prep($_POST['text']) : '';
+	$name = isset($_POST['name']) ? prep($_POST['name']) : '';
 	if($text!=='' and $name!==''){
 		try{
 			$dbh = db::get();
@@ -20,19 +20,23 @@ elseif($_SERVER['REQUEST_METHOD']==='POST'){
 			header('Location: '.BASE."?page=entry&id=$blog_entry_id&success");
 		}
 		catch(PDOException $e){
-			Doc::add_error('База данных сломалась (');
+			Doc::add_error('Ошибка сохранения данных');
 		}
 	}
 	else{
-		Doc::add_error('Вы не заполнили все поля');
+		Doc::add_error('Вы заполнили не все поля');
 		show_form(array('text' => $text, 'name' => $name));
+		Doc::set_title('Сохранение комментария');
 	}
 }
 function show_form($form_data){
 ?>
+<h2>Добавьте новый комментарий</h2>
 <form method="POST">
-	<input type="text" name="name" value="<?=$form_data['name']?>">
-	<textarea name="text" class="textarea"><?=$form_data['text']?></textarea>
+	<label for="createCommentName" class="label">Ваше имя:</label>
+	<input type="text" name="name" value="<?=$form_data['name']?>" id="createCommentName" class="text-input">
+	<label for="createCommentText" class="label">Текст комментария:</label>
+	<textarea name="text" class="textarea" id="createCommentText"><?=$form_data['text']?></textarea>
 	<button type="submit">Сохранить</button>
 </form>
 <?php

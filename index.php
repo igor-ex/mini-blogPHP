@@ -13,21 +13,29 @@ require_once "db-connection.php";
 require_once 'Doc.php';
 require_once 'functions.php';
 
+Doc::set_title('Мой блог');
+Doc::set_description('Блог про все');
+Doc::set_keywords('блог');
+
 $page = isset($_GET['page']) ? $_GET['page'] : false;
 ob_start();
+
 switch($page){
 	case 'entry':
+		define('PAGE', 'ENTRY');
 		require_once 'entry.php';
 	break;
 	
 	case false:
+		define('PAGE', 'LIST');
 		require_once 'list.php';
 	break;
 	
 	default:
-		header('HTTP/1.1 404 Not Found');
-		echo 'no such page';
+		define('PAGE', 'WRONG_PAGE');
+		render_404();
 }
+
 $content = ob_get_clean();
 require_once('template.php');
 db::disconnect();
