@@ -18,7 +18,8 @@
 	<aside class="sidebar">
 	<?php
 	if(PAGE==='LIST'){
-		require_once 'slider.php';
+		require_once 'components/slider.php';
+		slider_component();
 	}
 	?>
 	</aside>
