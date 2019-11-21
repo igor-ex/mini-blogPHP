@@ -1,11 +1,14 @@
-<?php defined('SITE') or die; ?>
+<?php
+use Models\ModelException;
+use Models\EntryModel;
+defined('SITE') or die; ?>
 <?php
 function entry_component($id){
 	echo '<div><a href="">Все записи</a></div>';
 
 	try{
 		require 'model.php';
-		$entry = get_data($id);
+		$entry = EntryModel::get_data($id);
 		if(is_null($entry['id'])){
 			render_404();
 			return;

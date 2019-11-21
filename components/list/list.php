@@ -1,10 +1,13 @@
-<?php defined('SITE') or die; ?>
+<?php
+use Models\ModelException;
+use Models\ListModel;
+defined('SITE') or die; ?>
 <?php
 function list_component(){
 	if($_SERVER['REQUEST_METHOD']==='GET'){
 		try{
 			require 'model.php';
-			$res = get_data();
+			$res = ListModel::get_data();
 
 			if(empty($res)){
 				Doc::add_message('Тут еще нет записей. Стань первым!');
