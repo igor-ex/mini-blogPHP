@@ -1,14 +1,12 @@
 <?php
-use Models\ModelException;
-use Models\EntryModel;
 defined('SITE') or die; ?>
 <?php
 function entry_component($id){
 	echo '<div><a href="">Все записи</a></div>';
 
 	try{
-		require 'model.php';
-		$entry = EntryModel::get_data($id);
+		require_once 'model.php';
+		$entry = EntryModel::getData($id);
 		if(is_null($entry['id'])){
 			render_404();
 			return;
@@ -17,7 +15,7 @@ function entry_component($id){
 		Doc::set_description('Пост гостя '.$entry['name']);
 		render('entry/view.php', array('entry' => $entry));
 	}
-	catch(ModelException $e){
+	catch(PDOException $e){
 		Doc::add_error('Ошибка получения данных');
 	}
 

@@ -1,14 +1,14 @@
 <?php defined('SITE') or die; ?>
 <?php
-function show_comments($blog_entry_id){
+function slider_component(){
 	if($_SERVER['REQUEST_METHOD']==='GET'){
 		try{
 			require_once 'model.php';
-			$comments = CommentsModel::getEntryComments($blog_entry_id);
-			if(empty($comments)){
+			$data = SliderModel::getData();
+			if(empty($data)){
 				return;
 			}
-			render('comments/view.php', array('comments' => $comments));
+			render('slider/view.php', array('data' => $data));
 		}
 		catch(PDOException $e){
 			Doc::add_error('Ошибка получения данных');
