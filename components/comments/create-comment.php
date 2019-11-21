@@ -35,6 +35,7 @@ function create_comment_component($blog_entry_id){
 			}
 			catch(PDOException $e){
 				Doc::add_error('Ошибка сохранения данных');
+				ex($e->getMessage());
 			}
 		}
 		else{
