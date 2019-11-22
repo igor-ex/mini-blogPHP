@@ -17,7 +17,7 @@
 	</main>
 	<aside class="sidebar">
 	<?php
-	if(PAGE==='LIST'){
+	if(PAGE==='ENTRY_LIST'){
 		require_once 'components/slider/slider.php';
 		slider_component();
 	}

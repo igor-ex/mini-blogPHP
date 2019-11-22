@@ -5,9 +5,9 @@ function routes(){
 	$matches = array();
 
 	if($virtual_path === '/'){
-		define('PAGE', 'LIST');
-		require_once 'components/list/list.php';
-		list_component();
+		define('PAGE', 'ENTRY_LIST');
+		require_once 'components/entry/controller.php';
+		EntryController::entryList();
 	}
 	elseif(preg_match('@^/entry/([\d]+)$@', $virtual_path, $matches)){
 		define('PAGE', 'ENTRY');

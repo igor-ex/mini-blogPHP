@@ -1,5 +1,5 @@
 <section class="blog-entries-list">
-<?php foreach($res as $entry): ?>
+<?php foreach($entries as $entry): ?>
 	<article class="blog-entry">
 		<h3 class="blog-enrty__title"><?=$entry['name']?>:</h3>
 		<div class="blog-entry__text"><?=nl2br($entry['text'])?></div>

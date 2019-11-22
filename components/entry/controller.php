@@ -6,7 +6,6 @@ require_once 'resource/controller.php';
 class EntryController extends Controller{
     static function entry($id){
         echo '<div><a href="">Все записи</a></div>';
-    
         try{
             require_once 'model.php';
             $entry = EntryModel::getData($id);
@@ -27,9 +26,31 @@ class EntryController extends Controller{
         CommentController::createComment($id);
     }
 
+    static function entryList(){
+        if($_SERVER['REQUEST_METHOD']==='GET'){
+            try{
+                require_once 'model.php';
+                $entries = EntryModel::getEntryList();
+    
+                if(empty($entries)){
+                    Doc::add_message('Тут еще нет записей. Хочешь добавить?');
+                }
+                else{
+                    self::render('list-view.php', array('entries' => $entries));
+                }
+            }
+            catch(PDOException $e){
+                Doc::add_error('Ошибка получения данных');
+            }
+        }
+        
+        self::createEntry();
+    }
+
     static function createEntry(){
         if($_SERVER['REQUEST_METHOD']==='GET'){
             self::render('form-view.php', array('text' => '', 'name' => ''));
+
             if(isset($_GET['success'])){
                 Doc::add_message('Ваш пост добавлен');
             }
@@ -37,8 +58,10 @@ class EntryController extends Controller{
         elseif($_SERVER['REQUEST_METHOD']==='POST'){
             $text = isset($_POST['text']) ? prep($_POST['text']) : '';
             $name = isset($_POST['name']) ? prep($_POST['name']) : '';
+
             require_once 'model.php';
             $entry = compact('name', 'text');
+
             if(EntryModel::isValidEntry($entry)){
                 try{
                     EntryModel::addEntry($entry);

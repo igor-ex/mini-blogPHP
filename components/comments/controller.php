@@ -9,9 +9,11 @@ class CommentController extends Controller{
             try{
                 require_once 'model.php';
                 $comments = CommentModel::getEntryComments($blog_entry_id);
+
                 if(empty($comments)){
                     return;
                 }
+
                 self::render('view.php', array('comments' => $comments));
             }
             catch(PDOException $e){
@@ -23,6 +25,7 @@ class CommentController extends Controller{
     static function createComment($blog_entry_id){
         if($_SERVER['REQUEST_METHOD']==='GET'){
             self::render('form-view.php', array('text' => '', 'name' => ''));
+
             if(isset($_GET['success'])){
                 Doc::add_message('Комментарий добавлен');
             }
@@ -30,8 +33,10 @@ class CommentController extends Controller{
         elseif($_SERVER['REQUEST_METHOD']==='POST'){
             $text = isset($_POST['text']) ? prep($_POST['text']) : '';
             $name = isset($_POST['name']) ? prep($_POST['name']) : '';
+            
             require_once 'model.php';
             $comment = compact('blog_entry_id', 'name', 'text');
+
             if(CommentModel::isValidComment($comment)){
                 try{
                     CommentModel::addComment($comment);

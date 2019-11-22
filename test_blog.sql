@@ -4,7 +4,7 @@ create table blog_entries(
   name varchar(25) not null,
   time timestamp not null default current_timestamp,
   key(time)
-) engine=InnoDB default charset=utf8;
+) engine=InnoDB charset=utf8;
 
 create table blog_comments(
   id int not null auto_increment primary key,

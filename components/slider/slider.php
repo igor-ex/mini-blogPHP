@@ -5,6 +5,7 @@ function slider_component(){
 		try{
 			require_once 'model.php';
 			$data = SliderModel::getData();
+			
 			if(empty($data)){
 				return;
 			}
