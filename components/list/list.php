@@ -18,6 +18,6 @@ function list_component(){
 			Doc::add_error('Ошибка получения данных');
 		}
 	}
-	require_once 'components/entry/create-entry.php';
-	create_entry_component();
+	require_once 'components/entry/controller.php';
+	EntryController::createEntry();
 }

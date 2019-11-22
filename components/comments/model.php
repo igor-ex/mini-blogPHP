@@ -1,7 +1,6 @@
+<?php defined('SITE') or die; ?>
 <?php
-defined('SITE') or die; ?>
-<?php
-class CommentsModel{
+class CommentModel{
     static function getEntryComments($blog_entry_id){
         $dbh = db::get();
         $query = 'select text text, name, date_format(time, "%d.%m.%Y") time from blog_comments where blog_entry_id=:id order by time desc';

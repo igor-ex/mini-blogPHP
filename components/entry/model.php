@@ -1,5 +1,4 @@
-<?php
-defined('SITE') or die; ?>
+<?php defined('SITE') or die; ?>
 <?php
 
 class EntryModel{
@@ -10,5 +9,18 @@ class EntryModel{
 		$sth = $dbh->prepare($query);
 		$sth->execute(array(':id' => $id));
 		return $sth->fetch();
+	}
+
+	static function addEntry($data){
+		extract($data);
+		$dbh = db::get();
+		$query = 'insert into blog_entries set text=:text, name=:name';
+		$sth = $dbh->prepare($query);
+		$sth->execute(array(':text' => $text, ':name' => $name));
+	}
+
+	static function isValidEntry($data){
+		extract($data);
+		return $text!='' and $name!='';
 	}
 }

@@ -1,6 +1,5 @@
 <?php defined('SITE') or die; ?>
 <?php
-//этот документ лучше его второй версии (такой же)
 class Doc {
 	private static $messages = array();
 	private static $errors = array();

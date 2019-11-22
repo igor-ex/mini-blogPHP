@@ -16,7 +16,7 @@ function render($path, $args=false){
 	require 'components/'.$path;
 }
 
-function ex($a,$string='',$b='auto'){
+function ex($a,$string='',$b='auto'){  //посмотреть что лежит в переменной
 	echo '<pre style="border:1px solid #fd5; background:rgba(255,200,50,.2); padding:7px; overflow-x:auto;">';
 	if($string)
 		echo $string.' = ';

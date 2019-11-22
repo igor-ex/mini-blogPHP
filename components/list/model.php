@@ -1,5 +1,4 @@
-<?php
-defined('SITE') or die; ?>
+<?php defined('SITE') or die; ?>
 <?php
   
 class ListModel{  

@@ -11,10 +11,16 @@ Doc::set_keywords('блог');
 
 ob_start();
 
-require_once 'routes.php';
-routes();
+call_user_func(function(){
+    require_once 'routes.php';
+    routes();
+});
 
 $content = ob_get_clean();
-require_once('template/template.php');
+
+call_user_func(function() use ($content){
+    require_once('template/template.php');
+});
+
 
 db::disconnect();

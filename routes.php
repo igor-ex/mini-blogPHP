@@ -11,8 +11,8 @@ function routes(){
 	}
 	elseif(preg_match('@^/entry/([\d]+)$@', $virtual_path, $matches)){
 		define('PAGE', 'ENTRY');
-		require_once 'components/entry/entry.php';
-		entry_component($matches[1]);
+		require_once 'components/entry/controller.php';
+		EntryController::entry($matches[1]);
 	}
 	else{
 		define('PAGE', 'WRONG_PAGE');
